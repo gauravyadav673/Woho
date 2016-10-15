@@ -8,8 +8,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.participateme.Models.Country;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -157,6 +155,17 @@ public class Utils {
         }
 
         return jsonObject1;
+    }
+    
+    //Use this method to convert bitmap into BASE64 encoded image.
+       public static String getStringImage(Bitmap bmp){
+        if (bmp!=null){
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] imageBytes = baos.toByteArray();
+            return Base64.encodeToString(imageBytes, Base64.DEFAULT);}
+
+        return null;
     }
 
 }
