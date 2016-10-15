@@ -1,10 +1,13 @@
 package com.participateme;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +34,7 @@ import java.util.Scanner;
 /*This class will contain methods to be used through out the project*/
 
 
-public class Utils {
+public class UtilClass {
 	
 	
 	//Use to get json response from the url ... @param(completeurl) = the url from which you want to take data;
@@ -168,4 +172,11 @@ public class Utils {
         return null;
     }
 
+    //method to decode image from base64
+    public static Bitmap decodeImage(String encodedString){
+        String encodedImage= encodedString.replace("data:image/jpeg;base64,","");
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return decodedByte;
+    }
 }
