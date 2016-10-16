@@ -12,21 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LandingActivity" />
-        <activity android:name=".StartActivity" />
-        <activity android:name=".ProductActivity">
-
-        </activity>
-        <activity android:name=".ChoiceActivity" />
-        <activity
-            android:name=".HomeActivity"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ProductActivity" />
+        <activity android:name=".ChoiceActivity" />
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CheckOTP" />
+        <activity android:name=".EnterService"></activity>
+        <activity android:name=".Cart"></activity>
     </application>
 
 </manifest>

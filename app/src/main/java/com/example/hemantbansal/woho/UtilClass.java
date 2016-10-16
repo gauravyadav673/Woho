@@ -1,4 +1,4 @@
-package com.participateme;
+package com.example.hemantbansal.woho;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -39,42 +39,48 @@ public class UtilClass {
 	
 	//Use to get json response from the url ... @param(completeurl) = the url from which you want to take data;
 
-    public static JSONObject getJSONFromUrl(String completeurl){
-        InputStream is = null;
-        JSONObject jsonObject=null;
-        String jsonstring="";
-        try {
-            URL url = new URL(completeurl);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("POST");
-            urlConnection.setReadTimeout(15000);
-            urlConnection.setDoOutput(true);
-            urlConnection.setDoInput(true);
+public static JSONObject getJSONFromUrl(String phnno){
+    InputStream is = null;
+    JSONObject jsonObject=null;
+    String jsonstring="";
+    String phone=phnno;
+    String message="Dear user, your OTP is  3476";
+    String ur= "http://api.textlocal.in/send/?username=hem.ban.061@gmail.com&hash=23d89d627abc938aee0eef548380ee9143fe1325&sender=TXTLCL&message="+message+"&numbers="+phone;
+    String completeurl = ur;
+    try {
+        URL url = new URL(completeurl);
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setRequestMethod("POST");
+        urlConnection.setReadTimeout(15000);
+        urlConnection.setDoOutput(true);
+        urlConnection.setDoInput(true);
 
-            is = new BufferedInputStream(urlConnection.getInputStream());
-            Scanner s = new Scanner(is).useDelimiter("\\A");
-            if(s.hasNext()){
-                jsonstring= s.next();
-            }
-            urlConnection.disconnect();
-        } catch (MalformedURLException e) {
-            Log.d("error", "error in getjsonfromurl MalformedUrlexception");
-        } catch (IOException e) {
-            Log.d("error", "error in getjsonfromurl Ioexception");
+        is = new BufferedInputStream(urlConnection.getInputStream());
+        Scanner s = new Scanner(is).useDelimiter("\\A");
+        if(s.hasNext()){
+            jsonstring= s.next();
         }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        try {
-            jsonObject = new JSONObject(jsonstring);
-        } catch (JSONException e) {
-            Log.d("error", "Json exception in get JSONFRomURL ");
-            return null;
-
-        }
-        return jsonObject;
+        urlConnection.disconnect();
+    } catch (MalformedURLException e) {
+        Log.d("error", "error in getjsonfromurl MalformedUrlexception");
+    } catch (IOException e) {
+        Log.d("error", "error in getjsonfromurl Ioexception");
     }
+    catch (Exception e){
+        e.printStackTrace();
+    }
+
+    Log.d("Answer=",jsonstring);
+
+    try {
+        jsonObject = new JSONObject(jsonstring);
+    } catch (JSONException e) {
+        Log.d("error", "Json exception in get JSONFRomURL ");
+        return null;
+
+    }
+    return jsonObject;
+}
 
 
   
@@ -177,6 +183,7 @@ public class UtilClass {
         String encodedImage= encodedString.replace("data:image/jpeg;base64,","");
         byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
         return decodedByte;
     }
 }
